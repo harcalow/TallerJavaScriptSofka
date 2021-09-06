@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TallerJavascritp</title>
+</head>
+<body>
+    <script>
+        
+        //objetos
+        class Electrodomestico{
+            constructor(consumo,procedencia){
+                this.consumo=consumo;
+                this.procedencia=procedencia;
+                this.precio=0;
+                this.precioInicial()
+            }
+    
+           precioInicial(){
+                if (this.consumo=="A"){
+                    this.precio=450000;
+                }else if (this.consumo=="B"){
+                    this.precio=350000;
+                }else {
+                    this.precio=250000;
+                }
+
+                if (this.procedencia=="Nacional"){
+                    this.precio+=250000;
+                }else{
+                    this.precio+=350000;
+                }
+            }
+            aumentoDePrecio(aumento){
+                this.precio+=aumento;
+            }
+            precioActual(){
+                return this.precio;
+            }
+        }
+        class Nevera extends Electrodomestico{
+            constructor(consumo,procedencia,size){
+                super(consumo,procedencia);
+                this.size=size;
+                this.dimension();
+            }
+            
+            dimension(){
+                var porcentaje
+                var precio= 0;
+                if (this.size>120){
+                    porcentaje=(this.size-120)/10;
+                    porcentaje=Math.floor(porcentaje);
+                    porcentaje=porcentaje*0.05;
+                    precio = super.precioActual()*porcentaje;
+                    super.aumentoDePrecio(precio);
+                }
+            }
+            
+        }
+        class Televisor extends Electrodomestico{
+            constructor(consumo,procedencia,size,sintonizador){
+                super(consumo,procedencia);
+                this.dimension(size);
+                this.calculoSintonizador(sintonizador);
+            }
+            dimension(size){
+                if (size>40){
+                    var precio=super.precioActual();
+                    precio=precio*0.30;//aumento del 30 %
+                    super.aumentoDePrecio(precio);
+                }
+            }
+            calculoSintonizador(sintonizador){
+                if (sintonizador=="si"){
+                    super.aumentoDePrecio(250000);
+                }
+            }
+        }
+
+        //main 
+        /*
+        var electrodomestico=new Televisor("A","Nacional",40,"si");
+        var precio=electrodomestico.precioActual();
+        console.log(precio);
+    
+        var nevera=new Nevera("A","Nacional",131);
+        var precio3=nevera.precioActual();
+        console.log(precio3);
+*/
+
+        //Inventario base
+        var mensaje=
+        `Inventario Base ingeresar los items separados por , ejemplo 1,3,4 \n
+        1) 5 Electrodomésticos generales de consumo B nacionales\n 
+        2) 10 Neveras de consumo A nacionales\n
+        3) 7 Tvs de consumo C internacionales\n
+        4) 13 Tvs de consumo B internacionales\n
+        5) 3 Tvs de consumo A nacionales\n
+        6) 8 Electrodomesticos generales de consumo A internacionales\n
+        7) 12 Neveras de consumo C internacionales\n
+        8) Todos\n
+        9) Salir
+        `;
+        var numeroDeUsuario= prompt(mensaje,"0");
+        // verificacion 
+        var electrodomestico=[];
+        electrodomestico.push(new Televisor("A","Nacional",40,"si"));
+        electrodomestico.push(new Televisor("B","Nacional",40,"si"));
+        electrodomestico.push(new Televisor("C","Nacional",40,"si"));
+
+        console.log(electrodomestico[0].precioActual());
+        console.log(electrodomestico[1].precioActual());
+        console.log(electrodomestico[2].precioActual());
+
+
+
+    </script>
+</body>
+</html>

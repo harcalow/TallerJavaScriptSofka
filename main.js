@@ -117,8 +117,7 @@ if (numeroDeUsuario=="1"){
     }
     
 }
-
-console.log(electrodomestico.length);        
+ 
 //factura 2
 if (numeroDeUsuario=="2"){
     var valorUnitario=0;
@@ -163,7 +162,7 @@ if (numeroDeUsuario=="3"){
             }
         }
     }
-    console.log(posicionElectrodomestico);
+
     if (posicionElectrodomestico.length>=5){
         for (i=0;i<5;i++){
             total+=valorUnitario;
